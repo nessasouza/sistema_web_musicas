@@ -22,6 +22,6 @@ def listar_musicas():
         musicas_em_python.append(mu)
     
     # fornecer a lista de pessoas para a página exibir as pessoas
-    return render_template("listar_musicas.html", listagem = musicas_em_python)
+    return render_template("musicas.html", listagem = musicas_em_python)
 
 app.run(debug=True, port=4999)
