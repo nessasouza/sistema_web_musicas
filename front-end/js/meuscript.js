@@ -11,6 +11,7 @@ $(function() { // quando o documento estiver pronto/carregado
                 alert("erro ao ler dados, verifique o backend");
             }
         });
+         
         function listar (musicas) {
             // esvaziar o corpo da tabela
             $('#corpoTabelaMusicas').empty();
@@ -20,8 +21,10 @@ $(function() { // quando o documento estiver pronto/carregado
             for (var i in musicas) { //i vale a posição no vetor
                 lin = '<tr>' + // elabora linha com os dados da musica
                 '<td>' + musicas[i].nome + '</td>' + 
-                '<td>' + musicas[i].cantor + '</td>' + 
+                '<td>' + musicas[i].artista + '</td>' + 
                 '<td>' + musicas[i].genero + '</td>' + 
+                '<td>' + musicas[i].ano + '</td>' + 
+                '<td>' + musicas[i].duracao + '</td>' + 
                 '</tr>';
                 // adiciona a linha no corpo da tabela
                 $('#corpoTabelaMusicas').append(lin);
@@ -48,51 +51,6 @@ $(function() { // quando o documento estiver pronto/carregado
         mostrar_conteudo("conteudoInicial");
     });
 
-    // código para mapear click do botão incluir musica
-    $(document).on("click", "#btIncluirMusica", function() {
-        //pegar dados da tela
-        nome = $("#campoNome").val();
-        cantor = $("#campoCantor").val();
-        genero = $("#campoGenero").val();
-        // preparar dados no formato json
-        var dados = JSON.stringify({ nome: nome, cantor: cantor, genero: genero });
-        // fazer requisição para o back-end
-        $.ajax({
-            url: 'http://localhost:5000/incluir_musica',
-            type: 'POST',
-            dataType: 'json', // os dados são recebidos no formato json
-            contentType: 'application/json', // tipo dos dados enviados
-            data: dados, // estes são os dados enviados
-            success: musicaIncluida, // chama a função listar para processar o resultado
-            error: erroAoIncluir
-        });
-        function musicaIncluida (retorno) {
-            if (retorno.resultado == "ok") { // a operação deu certo?
-                // informar resultado de sucesso
-                alert("Musica incluída com sucesso!");
-                // limpar os campos
-                $("#campoNome").val("");
-                $("#campoCantor").val("");
-                $("#campoGenero").val("");
-            } else {
-                // informar mensagem de erro
-                alert(retorno.resultado + ":" + retorno.detalhes);
-            }            
-        }
-        function erroAoIncluir (retorno) {
-            // informar mensagem de erro
-            alert("ERRO: "+retorno.resultado + ":" + retorno.detalhes);
-        }
-    });
-
-    // código a ser executado quando a janela de inclusão de musicas for fechada
-    $('#modalIncluirMusica').on('hide.bs.modal', function (e) {
-        // se a página de listagem não estiver invisível
-        if (! $("#tabelaMusicas").hasClass('invisible')) {
-            // atualizar a página de listagem
-            exibir_musicas();
-        }
-    });
 
     // a função abaixo é executada quando a página abre
     mostrar_conteudo("conteudoInicial");
