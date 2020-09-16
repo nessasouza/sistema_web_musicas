@@ -60,6 +60,59 @@
                     <!-- aqui serão exibidas as musicas -->
                 </tbody>
             </table>
+            <!-- janela modal de inclusão de musica -->
+            <div class="modal fade" id="modalIncluirMusica" tabindex="-1" role="dialog"
+                aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Incluir música</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <form>
+                                <div class="form-group">
+                                    <label for="campoNome">Nome</label>
+                                    <input type="text" class="form-control" id="campoNome"
+                                        aria-describedby="nomeHelp" placeholder="Nome">
+                                    <small id="nomeHelp" class="form-text text-muted">Informe o nome completo da música.</small>
+                                </div>
+                                <div class="form-group">
+                                    <label for="campoArtista">Artista</label>
+                                    <input type="text" class="form-control" id="campoArtista"
+                                        aria-describedby="artistaHelp" placeholder="Artista">
+                                    <small id="artistaHelp" class="form-text text-muted">Informe o nome do cantor ou da banda.</small>
+                                </div>
+                                <div class="form-group">
+                                    <label for="campoGenero">Gênero Musical</label>
+                                    <input type="text" class="form-control" id="campoGenero"
+                                        aria-describedby="generoHelp" placeholder="Gênero">
+                                    <small id="generoHelp" class="form-text text-muted">Informe o gênero musical da música.</small>
+                                </div>
+                                <div class="form-group">
+                                    <label for="campoAno">Ano de Lançamento</label>
+                                    <input type="text" class="form-control" id="campoAno"
+                                        aria-describedby="anoHelp" placeholder="Ano">
+                                    <small id="anoHelp" class="form-text text-muted">Informe o ano de lançamento da música.</small>
+                                </div>
+                                <div class="form-group">
+                                    <label for="campoDuracao">Duração</label>
+                                    <input type="text" class="form-control" id="campoDuracao"
+                                        aria-describedby="duracaoHelp" placeholder="Duração">
+                                    <small id="duracaoHelp" class="form-text text-muted">Informe o tempo de duração da música.</small>
+                                </div>
+                            </form>
+                        </div>
+
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                            <button id="btIncluirMusica" type="button" class="btn btn-primary">Incluir</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
         </div> <!-- fim da div corpo da página -->
     </div>
