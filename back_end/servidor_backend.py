@@ -8,9 +8,9 @@ def inicio():
 
 @app.route("/listar_musicas")
 def listar_musicas():
-    # obter as musicas do cadastro
+    # obter as músicas do cadastro
     musicas = db.session.query(Musica).all()
-    # aplicar o método json que a classe Musica possui a cada elemento da lista
+    # aplicar o método json que a classe música possui a cada elemento da lista
     musicas_em_json = [ x.json() for x in musicas]
     # converter a lista do python para json
     resposta = jsonify(musicas_em_json)
