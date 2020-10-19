@@ -19,12 +19,16 @@ $(function() { // quando o documento estiver pronto/carregado
             mostrar_conteudo("tabelaMusicas");      
             // percorrer a lista de músicas retornadas; 
             for (var i in musicas) { //i vale a posição no vetor
-                lin = '<tr>' + // elabora linha com os dados da música
+                lin = '<tr id="linha_'+musicas[i].id+'">' + // elabora linha com os dados da música
                 '<td>' + musicas[i].nome + '</td>' + 
                 '<td>' + musicas[i].artista + '</td>' + 
                 '<td>' + musicas[i].genero + '</td>' + 
                 '<td>' + musicas[i].ano + '</td>' + 
-                '<td>' + musicas[i].duracao + '</td>' + 
+                '<td>' + musicas[i].duracao + '</td>' +
+                '<td><a href=# id="excluir_' + musicas[i].id + '" ' + 
+                'class="excluir_musica"><img src="img/excluir.png" '+
+                'alt="Excluir música" title="Excluir música" height=30 width= 30></a>' + 
+                '</td>' + 
                 '</tr>';
                 // adiciona a linha no corpo da tabela
                 $('#corpoTabelaMusicas').append(lin);
@@ -111,4 +115,35 @@ $(document).on("click", "#btIncluirMusica", function validarform() {
 
     // a função abaixo é executada quando a página abre
     mostrar_conteudo("conteudoInicial");
+
+    // código para o ícone de excluir 
+    $(document).on("click", ".excluir_musica", function() {
+        // obter ID do ícone
+        var componente_clicado = $(this).attr('id'); 
+        // obter ID da música
+        var nome_icone = "excluir_";
+        var id_musica = componente_clicado.substring(nome_icone.length);
+        // solicitar a exclusão
+        $.ajax({
+            url: 'http://localhost:5000/excluir_musica/'+id_musica,
+            type: 'DELETE', 
+            dataType: 'json', 
+            success: musicaExcluida, 
+            error: erroAoExcluir
+        });
+        function musicaExcluida (retorno) {
+            if (retorno.resultado == "ok") { 
+                // remover a linha
+                $("#linha_" + id_musica).fadeOut(1000, function(){
+                    alert("Música removida com sucesso!");
+                });
+            } else {
+                alert(retorno.resultado + ":" + retorno.detalhes);
+            }            
+        }
+        function erroAoExcluir (retorno) {
+            alert("Erro ao excluir dados, verifique o backend: ");
+        }
+    });
+
 });
