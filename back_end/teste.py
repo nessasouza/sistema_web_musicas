@@ -36,12 +36,12 @@ if __name__ == "__main__":
     db.session.add(m7)
     db.session.commit()
     
-    print(m1.json())
-    print(m2.json())
-    print(m3.json())
-    print(m4.json())
-    print(m5.json())
-    print(m6.json())
-    print(m7.json())
-
     
+    #criar playlist
+    p1 = Playlist(nome="Melhores do Sertanejo", criador="Vanessa de Souza")
+
+    #criar selecao
+    s1 = Selecao(ordem= 1, musica = m7, playlist = p1)
+    db.session.add(s1)
+    db.session.commit()
+    print(f"Selecao: {s1.json()}")

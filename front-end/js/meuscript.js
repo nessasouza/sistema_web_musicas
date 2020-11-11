@@ -7,16 +7,15 @@ $(function() { // quando o documento estiver pronto/carregado
             method: 'GET',
             dataType: 'json', // os dados são recebidos no formato json
             success: listar, // chama a função listar para processar o resultado
-            error: function() {
+            error: function(problema) {
                 alert("erro ao ler dados, verifique o backend");
             }
         });
-         
         function listar (musicas) {
             // esvaziar o corpo da tabela
             $('#corpoTabelaMusicas').empty();
             // tornar a tabela visível
-            mostrar_conteudo("tabelaMusicas");      
+            mostrar_conteudo("cadastroMusicas");      
             // percorrer a lista de músicas retornadas; 
             for (var i in musicas) { //i vale a posição no vetor
                 lin = '<tr id="linha_'+musicas[i].id+'">' + // elabora linha com os dados da música
@@ -39,10 +38,11 @@ $(function() { // quando o documento estiver pronto/carregado
     // função que mostra um conteúdo e esconde os outros
     function mostrar_conteudo(identificador) {
         // esconde todos os conteúdos
-        $("#tabelaMusicas").addClass('invisible');
-        $("#conteudoInicial").addClass('invisible');
+        $("#cadastroMusicas").addClass('d-none');
+        $("#conteudoInicial").addClass('d-none');
+        $("#cadastroSelecao").addClass('d-none');
         // torna o conteúdo escolhido visível
-        $("#"+identificador).removeClass('invisible');      
+        $("#"+identificador).removeClass('d-none');      
     }
 
     // código para mapear o click do link Listar
@@ -107,7 +107,7 @@ $(document).on("click", "#btIncluirMusica", function validarform() {
     // código a ser executado quando a janela de inclusão de musicas for fechada
     $('#modalIncluirMusica').on('hide.bs.modal', function (e) {
         // se a página de listagem não estiver invisível
-        if (! $("#tabelaMusicas").hasClass('invisible')) {
+        if (! $("#cadastroMusicas").hasClass('d-none')) {
             // atualizar a página de listagem
             exibir_musicas();
         }
@@ -146,4 +146,50 @@ $(document).on("click", "#btIncluirMusica", function validarform() {
         }
     });
 
+
+    // função para exibir exames realizados
+    // essa função é bem parecida com a função exibir_pessoas, certo? ;-)
+    function exibir_selecoes() {
+        $.ajax({
+            url: 'http://localhost:5000/listar_selecoes',
+            method: 'GET',
+            dataType: 'json', // os dados são recebidos no formato json
+            success: listar, // chama a função listar para processar o resultado
+            error: function(problema) {
+                alert("erro ao ler dados, verifique o backend: ");
+            }
+        });
+        function listar (selecoes) {
+            // esvaziar o corpo da tabela
+            $('#corpoTabelaSelecao').empty();
+            // tornar visível a página de exames realizados
+            mostrar_conteudo("cadastroSelecao");      
+            // percorrer a lista de exanes realizados retornados; 
+            for (var i in selecoes) { //i vale a posição no vetor
+                lin = '<tr id="linha_selecoes_'+selecoes[i].id+'">' + 
+                '<td>' + selecoes[i].ordem + '</td>' + 
+                // dados da pessoa
+                '<td>' + selecoes[i].musica.nome + '</td>' + 
+                '<td>' + selecoes[i].musica.artista + '</td>' + 
+                '<td>' + selecoes[i].musica.genero + '</td>' + 
+                '<td>' + selecoes[i].musica.ano + '</td>' + 
+                '<td>' + selecoes[i].musica.duracao + '</td>' + 
+                // dados do exame
+                '<td>' + selecoes[i].playlist.nome + '</td>' + 
+                '<td>' + selecoes[i].playlist.criador + '</td>' + 
+                '<td><a href=# id="excluir_selecao_' + selecoes[i].id + '" ' + 
+                  'class="excluir_selecao"><img src="img/excluir.png"  '+
+                  'alt="Excluir selecao" title="Excluir selecao" height=30 width= 30></a>' + 
+                '</td>' + 
+                '</tr>';
+                // adiciona a linha no corpo da tabela
+                $('#corpoTabelaSelecao').append(lin);
+            }
+        }
+    }
+
+    // código para mapear o click do link Exames Realizados
+    $(document).on("click", "#linkListarSelecoes", function() {
+        exibir_selecoes();
+    });
 });
