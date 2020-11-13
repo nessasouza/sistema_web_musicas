@@ -40,6 +40,9 @@ if __name__ == "__main__":
     #criar playlist
     p1 = Playlist(nome="Melhores do Sertanejo", criador="Vanessa de Souza")
 
+    db.session.add(p1)
+    db.session.commit()
+    
     #criar selecao
     s1 = Selecao(ordem= 1, musica = m7, playlist = p1)
     db.session.add(s1)
