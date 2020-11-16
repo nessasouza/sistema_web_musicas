@@ -8,7 +8,7 @@ class Musica(db.Model):
     ano = db.Column(db.String(254))
     duracao = db.Column(db.String(254))
 
-    # método para expressar a pessoa em forma de texto
+    # método para expressar a musica em forma de texto
     def __str__(self):
         return self.nome + "[id="+str(self.id)+ "], " +\
             self.artista + ", " + self.genero + ", " + self.ano + ", " + self.duracao

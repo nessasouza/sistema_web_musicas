@@ -47,10 +47,10 @@ def excluir_musica(musica_id):
     return resposta 
 
 @app.route("/listar_selecoes")
-# o código da função abaixo é similar ao código da função listar_pessoas
+# o código da função abaixo é similar ao código da função listar_musicas
 # será que dava pra generalizar essa função? :-)
 def listar_selecoes():
-    # obter exames realizados
+    # obter selecoes
     selecoes = db.session.query(Selecao).all()
     # converter dados para json
     lista_jsons = [ x.json() for x in selecoes ]

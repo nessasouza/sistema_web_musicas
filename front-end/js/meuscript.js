@@ -147,8 +147,8 @@ $(document).on("click", "#btIncluirMusica", function validarform() {
     });
 
 
-    // função para exibir exames realizados
-    // essa função é bem parecida com a função exibir_pessoas, certo? ;-)
+    // função para exibir selecoes
+    // essa função é bem parecida com a função exibir_musicas, certo? ;-)
     function exibir_selecoes() {
         $.ajax({
             url: 'http://localhost:5000/listar_selecoes',
@@ -162,19 +162,19 @@ $(document).on("click", "#btIncluirMusica", function validarform() {
         function listar (selecoes) {
             // esvaziar o corpo da tabela
             $('#corpoTabelaSelecao').empty();
-            // tornar visível a página de exames realizados
+            // tornar visível a página de selecoes
             mostrar_conteudo("cadastroSelecao");      
-            // percorrer a lista de exanes realizados retornados; 
+            // percorrer a lista de selecoes retornados; 
             for (var i in selecoes) { //i vale a posição no vetor
                 lin = '<tr id="linha_selecoes_'+selecoes[i].id+'">' + 
                 '<td>' + selecoes[i].ordem + '</td>' + 
-                // dados da pessoa
+                // dados da musica
                 '<td>' + selecoes[i].musica.nome + '</td>' + 
                 '<td>' + selecoes[i].musica.artista + '</td>' + 
                 '<td>' + selecoes[i].musica.genero + '</td>' + 
                 '<td>' + selecoes[i].musica.ano + '</td>' + 
                 '<td>' + selecoes[i].musica.duracao + '</td>' + 
-                // dados do exame
+                // dados da playlist
                 '<td>' + selecoes[i].playlist.nome + '</td>' + 
                 '<td>' + selecoes[i].playlist.criador + '</td>' + 
                 '<td><a href=# id="excluir_selecao_' + selecoes[i].id + '" ' + 
@@ -188,7 +188,7 @@ $(document).on("click", "#btIncluirMusica", function validarform() {
         }
     }
 
-    // código para mapear o click do link Exames Realizados
+    // código para mapear o click do link Selecoes
     $(document).on("click", "#linkListarSelecoes", function() {
         exibir_selecoes();
     });
