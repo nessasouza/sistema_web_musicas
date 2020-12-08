@@ -60,6 +60,76 @@ def listar_selecoes():
     resposta.headers.add("Access-Control-Allow-Origin", "*")
     return resposta
 
+@app.route("/incluir_selecao", methods=['post'])
+def incluir_selecao():
+    # preparar uma resposta otimista
+    resposta = jsonify({"resultado": "ok", "detalhes": "ok"})
+    # receber as informações
+    dados = request.get_json()
+    try: # tentar executar a operação
+      nova = Selecao(**dados) # criar a nova seleção 
+      db.session.add(nova) # adicionar no BD
+      db.session.commit() # efetivar a operação de gravação
+    except Exception as e: # em caso de erro...
+      # informar mensagem de erro
+      resposta = jsonify({"resultado":"erro", "detalhes":str(e)})
+    # adicionar cabeçalho de liberação de origem
+    resposta.headers.add("Access-Control-Allow-Origin", "*")
+    return resposta # responder!
+
+@app.route("/excluir_selecao/<int:selecao_id>", methods=['DELETE'])
+def excluir_selecao(selecao_id):
+    resposta = jsonify({"resultado": "ok", "detalhes": "ok"})
+    try:
+        Selecao.query.filter(Selecao.id == selecao_id).delete()
+        db.session.commit()
+    except Exception as e:
+        resposta = jsonify({"resultado":"erro", "detalhes":str(e)})
+    resposta.headers.add("Access-Control-Allow-Origin", "*")
+    return resposta 
+
+@app.route("/listar_playlists")
+# o código da função abaixo é similar ao código da função listar_musicas
+# será que dava pra generalizar essa função? :-)
+def listar_playlists():
+    # obter selecoes
+    playlists = db.session.query(Playlist).all()
+    # converter dados para json
+    lista_jsons = [ x.json() for x in playlists ]
+    # converter a lista do python para json
+    resposta = jsonify(lista_jsons)
+    # PERMITIR resposta para outras pedidos oriundos de outras tecnologias
+    resposta.headers.add("Access-Control-Allow-Origin", "*")
+    return resposta
+
+@app.route("/incluir_playlist", methods=['post'])
+def incluir_playlist():
+    # preparar uma resposta otimista
+    resposta = jsonify({"resultado": "ok", "detalhes": "ok"})
+    # receber as informações
+    dados = request.get_json()
+    try: # tentar executar a operação
+      nova = Playlist(**dados) # criar a nova seleção 
+      db.session.add(nova) # adicionar no BD
+      db.session.commit() # efetivar a operação de gravação
+    except Exception as e: # em caso de erro...
+      # informar mensagem de erro
+      resposta = jsonify({"resultado":"erro", "detalhes":str(e)})
+    # adicionar cabeçalho de liberação de origem
+    resposta.headers.add("Access-Control-Allow-Origin", "*")
+    return resposta # responder!
+
+@app.route("/excluir_playlist/<int:playlist_id>", methods=['DELETE'])
+def excluir_playlist(playlist_id):
+    resposta = jsonify({"resultado": "ok", "detalhes": "ok"})
+    try:
+        Playlist.query.filter(Playlist.id == playlist_id).delete()
+        db.session.commit()
+    except Exception as e:
+        resposta = jsonify({"resultado":"erro", "detalhes":str(e)})
+    resposta.headers.add("Access-Control-Allow-Origin", "*")
+    return resposta 
+
 @app.route("/listar/<string:classe>")
 def listar(classe):
     if classe == "Selecao":
@@ -75,5 +145,7 @@ def listar(classe):
     # PERMITIR resposta para outras pedidos oriundos de outras tecnologias
     resposta.headers.add("Access-Control-Allow-Origin", "*")
     return resposta # retornar...
+
+
 
 app.run(debug=True) 

@@ -98,8 +98,10 @@ if __name__ == "__main__":
     
     #criar playlist
     p1 = Playlist(nome="Melhores do Sertanejo", criador="Vanessa de Souza")
+    p2 = Playlist(nome="Badzinha", criador="Vanessa de Souza")
 
     db.session.add(p1)
+    db.session.add(p2)
     db.session.commit()
     
     #criar selecao

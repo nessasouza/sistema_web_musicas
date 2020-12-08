@@ -137,6 +137,64 @@
             </div>
 
 
+            <!-- janela modal de inclusão de playlist -->
+            <div class="modal fade" id="modalIncluirPlaylist" tabindex="-1" role="dialog"
+                aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Incluir playlist</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <form>
+                                <div class="form-group">
+                                    <label for="campoNome">Nome</label>
+                                    <input type="text" class="form-control" id="campoNome"
+                                        aria-describedby="nomeHelp" placeholder="Nome">
+                                    <small id="nomeHelp" class="form-text text-muted">Informe o nome da playlist.</small>
+                                </div>
+                                <div class="form-group">
+                                    <label for="campoCriador">Criador</label>
+                                    <input type="text" class="form-control" id="campoCriador"
+                                        aria-describedby="criadorHelp" placeholder="Criador">
+                                    <small id="criadorHelp" class="form-text text-muted">Informe o seu nome.</small>
+                                </div>
+
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                            <button id="btIncluirPlaylist" type="button" class="btn btn-primary">Incluir</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="container" id="cadastroPlaylists">
+                
+                <h5>Cadastro de Playlists</h5>
+
+                <!-- link que abre formulário de inclusão de playlists -->
+                <a class="nav-item nav-link" data-toggle="modal" 
+                data-target="#modalIncluirPlaylist" href="#"><img src="img/incluir.png" title="Incluir playlist" height="30px" width="85px"></a>
+                
+                <!-- tabela de listagem de playlists -->
+                <table class="table table-striped table-hover" id="tabelaPlaylists">
+                    <thead>
+                        <!-- primeira linha da tabela: títulos -->
+                        <tr>
+                            <th scope="col">Nome</th>
+                            <th scope="col">Criador</th>
+                            <th scope="col">Operações</th>
+                        </tr>
+                    </thead>
+                    <tbody id="corpoTabelaPlaylists">
+                        <!-- aqui serão exibidas as musicas -->
+                    </tbody>
+                </table>
+            </div>
+
+
 
             <div class="container" id="cadastroSelecao">
                 <h5>Seleções de Músicas</h5>
@@ -159,7 +217,7 @@
                             <th scope="col">Ano de Lançamento</th>
                             <th scope="col">Duração</th>
                             <!-- campos da playlist -->
-                            <th scope="col">Nome</th>
+                            <th scope="col">Nome da Playlist</th>
                             <th scope="col">Criador</th>
                             <th scope="col">Operações</th>
                         </tr>
@@ -189,7 +247,7 @@
                                       aria-describedby="musicaIdHelp" placeholder="MusicaId">
                                     <!-- opções serão preenchidas via javascript -->
                                     </select> 
-                                    <img id="loading_campoMusicaId" src="img/loading.gif" class="img-fluid d-none" alt="Carregando musicas" height="50px" width="52px">                                   
+                                    <img id="loading_campoMusicaId" src="img/loading.gif" class="img-fluid d-none" alt="Carregando musicas" height="40px" width="42px">                                   
                                     <small id="musicaIdHelp" class="form-text text-muted">Selecione uma música.</small>
                                 </div>
                                 <div class="form-group">
@@ -198,7 +256,7 @@
                                     aria-describedby="playlistIdHelp" placeholder="PlaylistId">
                                     <!-- opções serão preenchidas via javscript -->
                                     </select>                                    
-                                    <img id="loading_campoPlaylistId" src="img/loading.gif" class="img-fluid d-none" alt="Carregando playlists" height="50px" width="52px">                                   
+                                    <img id="loading_campoPlaylistId" src="img/loading.gif" class="img-fluid d-none" alt="Carregando playlists" height="40px" width="42px">                                   
                                     <small id="playlistIdHelp" class="form-text text-muted">Selecione uma playlist.</small>
                                 </div>
                                 <div class="form-group">
@@ -217,66 +275,6 @@
                     </div>
                 </div>
             </div>
- 
-            <div class="container" id="cadastroPlaylists">
-                <h5>Cadastro de Playlists</h5>
-
-                <!-- link que abre formulário de inclusão de selecoes -->
-                <a class="nav-item nav-link" data-toggle="modal" 
-                data-target="#modalIncluirPlaylist" href="#">
-                  <img src="img/incluir.png" title="Incluir playlist" height="30px" width="85px"></a>
-                
-                <!-- tabela de seleções -->
-                <table class="table table-striped table-hover" id="tabelaPlaylist">
-                    <thead>
-                        <!-- primeira linha da tabela: títulos -->
-                        <tr>
-                            <th scope="col">Nome</th>
-                            <th scope="col">Criador</th>
-                            <th scope="col">Operações</th>
-                        </tr>
-                    </thead>
-                    <tbody id="corpoTabelaPlaylists">
-                        <!-- aqui serão exibidos as seleções de músicas -->
-                    </tbody>
-                </table>
-            </div>
-
-            <!-- janela modal de inclusão de playlist -->
-            <div class="modal fade" id="modalIncluirPlaylist" tabindex="-1" role="dialog"
-                aria-labelledby="exampleModalLabel" aria-hidden="true">
-                <div class="modal-dialog" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">Incluir playlist</h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                        <div class="modal-body">
-                            <form>
-                                <div class="form-group">
-                                    <label for="campoNome">Nome da Playlist</label>
-                                    <input type="text" class="form-control" id="campoNome"
-                                        aria-describedby="nomeHelp" placeholder="Nome">
-                                    <small id="nomeHelp" class="form-text text-muted">Informe o nome da playlist.</small>
-                                </div>
-                                <div class="form-group">
-                                    <label for="campoCriador">Criador</label>
-                                    <input type="text" class="form-control" id="campoCriador"
-                                        aria-describedby="criadorHelp" placeholder="Criador">
-                                    <small id="criadorHelp" class="form-text text-muted">Informe o seu nome.</small>
-                                </div>
-
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                            <button id="btIncluirPlaylist" type="button" class="btn btn-primary">Incluir</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-                
-            
 
 
         </div> <!-- fim da div corpo da página -->
