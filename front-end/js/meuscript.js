@@ -161,7 +161,7 @@ $(document).on("click", ".excluir_musica", function() {
 // INCLUIR playlist_____________________________________________________________________________________________________
 $(document).on("click", "#btIncluirPlaylist", function() {
     //pegar dados da tela
-    nome = $("#campoNome").val();
+    nome = $("#campoNomePlay").val();
     criador = $("#campoCriador").val();
     // preparar dados no formato json
     var dados = JSON.stringify({  nome: nome, criador: criador });
@@ -180,7 +180,7 @@ $(document).on("click", "#btIncluirPlaylist", function() {
             // informar resultado de sucesso
             alert("Dados incluídos com sucesso!");
             // limpar os campos
-            $("#campoNome").val("");
+            $("#campoNomePlay").val("");
             $("#campoCriador").val("");
         } else {
             // informar mensagem de erro
