@@ -1,10 +1,11 @@
 $(function() { // quando o documento estiver pronto/carregado
 
+    var urlx = 'http://nessasouza.pythonanywhere.com/'
 // MÚSICA ----------------------------------------------------------------------------------------------
     // função para EXIBIR músicas na tabela ___________________________________________________________
     function exibir_musicas() {
         $.ajax({
-            url: 'http://localhost:5000/listar_musicas',
+            url: urlx + '/listar_musicas',
             method: 'GET',
             dataType: 'json', // os dados são recebidos no formato json
             success: listar, // chama a função listar para processar o resultado
@@ -55,7 +56,7 @@ $(document).on("click", "#btIncluirMusica", function validarform() {
         var dados = JSON.stringify({ nome: nome, artista: artista, genero: genero, ano: ano, duracao: duracao });
         // fazer requisição para o back-end
         $.ajax({
-            url: 'http://localhost:5000/incluir_musica',
+            url: urlx + '/incluir_musica',
             type: 'POST',
             dataType: 'json', // os dados são recebidos no formato json
             contentType: 'application/json', // tipo dos dados enviados
@@ -103,7 +104,7 @@ $(document).on("click", ".excluir_musica", function() {
     var id_musica = componente_clicado.substring(nome_icone.length);
     // solicitar a exclusão
     $.ajax({
-        url: 'http://localhost:5000/excluir_musica/'+id_musica,
+        url: urlx + '/excluir_musica/'+id_musica,
         type: 'DELETE', 
         dataType: 'json', 
         success: musicaExcluida, 
@@ -129,7 +130,7 @@ $(document).on("click", ".excluir_musica", function() {
 // função para EXIBIR músicas na tabela___________________________________________________________________________
     function exibir_playlists() {
         $.ajax({
-            url: 'http://localhost:5000/listar_playlists',
+            url: urlx + '/listar_playlists',
             method: 'GET',
             dataType: 'json', // os dados são recebidos no formato json
             success: listar, // chama a função listar para processar o resultado
@@ -167,7 +168,7 @@ $(document).on("click", "#btIncluirPlaylist", function() {
     var dados = JSON.stringify({  nome: nome, criador: criador });
     // fazer requisição para o back-end
     $.ajax({
-        url: 'http://localhost:5000/incluir_playlist',
+        url: urlx + '/incluir_playlist',
         type: 'POST',
         dataType: 'json', // os dados são recebidos no formato json
         contentType: 'application/json', // tipo dos dados enviados
@@ -211,7 +212,7 @@ $(document).on("click", ".excluir_playlist", function() {
     var playlist_id = componente_clicado.substring(nome_icone.length);
     // solicitar a exclusão
     $.ajax({
-        url: 'http://localhost:5000/excluir_playlist/'+playlist_id,
+        url: urlx + '/excluir_playlist/'+playlist_id,
         type: 'DELETE', 
         dataType: 'json', 
         success: playlistExcluida, 
@@ -238,7 +239,7 @@ $(document).on("click", ".excluir_playlist", function() {
     // essa função é bem parecida com a função exibir_musicas, certo? ;-)
     function exibir_selecoes() {
         $.ajax({
-            url: 'http://localhost:5000/listar_selecoes',
+            url: urlx + '/listar_selecoes',
             method: 'GET',
             dataType: 'json', // os dados são recebidos no formato json
             success: listar, // chama a função listar para processar o resultado
@@ -285,7 +286,7 @@ $(document).on("click", ".excluir_playlist", function() {
         var dados = JSON.stringify({ ordem: ordem, musica_id: musica_id, playlist_id: playlist_id });
         // fazer requisição para o back-end
         $.ajax({
-            url: 'http://localhost:5000/incluir_selecao',
+            url: urlx + '/incluir_selecao',
             type: 'POST',
             dataType: 'json', // os dados são recebidos no formato json
             contentType: 'application/json', // tipo dos dados enviados
@@ -330,7 +331,7 @@ $(document).on("click", ".excluir_playlist", function() {
         var selecao_id = componente_clicado.substring(nome_icone.length);
         // solicitar a exclusão
         $.ajax({
-            url: 'http://localhost:5000/excluir_selecao/'+selecao_id,
+            url: urlx + '/excluir_selecao/'+selecao_id,
             type: 'DELETE', 
             dataType: 'json', 
             success: selecaoExcluida, 
@@ -363,7 +364,7 @@ $(document).on("click", ".excluir_playlist", function() {
 
     function carregarCombo(combo_id, nome_classe) {
         $.ajax({
-            url: 'http://localhost:5000/listar/'+nome_classe,
+            url: urlx + '/listar/'+nome_classe,
             method: 'GET',
             dataType: 'json', // os dados são recebidos no formato json
             success: carregar, // chama a função listar para processar o resultado
